@@ -225,9 +225,13 @@ column-gap: 5px;}
 column-count: 2;
 column-gap: 5px;}
 header{flex-direction: column;}
+
+.general  {flex-direction: column;}
+#gallery{margin-top: 100px;}
 }
-@media(max-width:600px){
+@media(max-width:400px){
 .pics {
 column-count: 1;
 column-gap: 2px;}
 }
+
