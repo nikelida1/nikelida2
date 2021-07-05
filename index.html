@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>nikelida1</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="predictions.js"></script>
+</head>
+<body>
+	
+	<header id="main">
+ <div class="logo"><img src="img/logo.png"></div>
+	<ul class="nav">
+	<li><a href="#main" class="first">Home</a></li>
+	<li><a href="#gallery">Photo Gallery</a></li>
+	<li><a href="#predictionBox">Prediction for you</a></li>
+	<li><a href="#backgroundBox">Background color</a></li>
+	<li><a href="#listenMusic">Listen music</a></li>
+	<li><a href="#contacts">Contacts</a></li>
+</ul>
+</header>
+
+<div id="gallery">
+	<h1>Photo Gallery</h1>
+
+<div class="general">
+	<p>Categories:</p>
+	<ul class="categories">
+		<li data-f ='all'>All</li>
+		<li data-f ='nature'>Nature</li>
+		<li data-f ='house'>House</li>
+		<li data-f ='car'>Car</li>
+		<li data-f ='design'>Design</li>
+		<li data-f ='music'>Music</li>
+		<li data-f ='road'>Road</li>
+		<li data-f ='shop'>Shop</li>
+		<li data-f ='woman'>Woman</li>
+	</ul>
+	</div>
+
+ <ul class="pics">
+ 	<li class="box design"><img src="img/1.jpg"><p>On the wall</p></li>
+ 	<li class="box shop"><img src="img/2.jpg"><p>Coffee shop</p></li>
+ 	<li class="box car"><img src="img/3.jpg"><p>Lime bus</p></li>
+ 	<li class="box car"><img src="img/4.jpg"><p>Orange bus</p></li>
+ 	<li class="box shop"><img src="img/5.jpg"><p>Book shop</p></li>
+ 	<li class="box design"><img src="img/6.jpg"><p>Shelves</p></li>
+ 	<li class="box house"><img src="img/7.jpg"><p>House woth light door</p></li>
+ 	<li class="box road"><img src="img/8.jpg"><p>San-Francisco</p></li>
+ 	<li class="box design"><img src="img/9.jpg"><p>Сoffee table</p></li>
+ 	<li class="box woman"><img src="img/10.jpg"><p>Woman on the road</p></li>
+ 	<li class="box woman"><img src="img/11.jpg"><p>Girl in the dress</p></li>
+ 	<li class="box nature"><img src="img/12.jpg"><p>Mountain</p></li>
+ 	<li class="box nature"><img src="img/13.jpg"><p>Ocean</p></li>
+ 	<li class="box music"><img src="img/14.jpg"><p>Music</p></li>
+ 	<li class="box shop"><img src="img/15.jpg"><p>Book shop</p></li>
+ 	<li class="box nature"><img src="img/16.jpg"><p>Mountain</p></li>
+ 	<li class="box nature"><img src="img/17.jpg"><p>Night</p></li>
+ 	<li class="box road"><img src="img/18.jpg"><p>Sand</p></li>
+ 	<li class="box design"><img src="img/19.jpg"><p>Shelves</p></li>
+ 	<li class="box house"><img src="img/20.jpg"><p>House in the winter</p></li>
+ </ul>
+</div>
+
+<div class id="predictionBox">
+	<h1>Prediction for you for the day:</h1>
+	<input type="button" value="Click here" id="button">
+	<div class="prediction"></div>
+</div>
+
+<div class id="backgroundBox">
+	<h1>Don't like the background color? <br>Let's change it</h1>
+	<select id="select">
+		<option value="white">White</option>
+		<option value="lightsalmon">Lightsalmon</option>
+		<option value="peachpuff">Peachpuff</option>
+		<option value="darkkhaki">Darkkhaki</option>
+		<option value="lightgreen">Lightgreen</option>
+		<option value="lightcyan">Lightcyan</option>
+		<option value="lavender">Lavender</option>
+		<option value="plum">Plum</option>
+		<option value="lightpink">Lightpink</option>
+		<option value="oldlace">Oldlace</option>
+		<option value="paleturquoise">Paleturquoise</option>
+		<option value="	gainsboro">Gainsboro</option>
+		<option value="	goldenrod">goldenrod</option>
+	</select>
+</div>
+
+<div class id="listenMusic">
+	<h1>Listen music</h1>
+
+	<div class="listenBox">
+	<div class="listen">Click here to listen</div>
+	<img src="img/play.png" id="songButton">
+	<audio src="Deesmi.mp3" id="audio"></audio>
+   </div>
+</div>
+
+<div id="contacts">
+	<h1>Contacts</h1>
+	<div class="socialNetworks">
+		<a href="https://www.facebook.com/lida.melnychuk" target="blank"><img src="img/facebook.png"></a>
+		<a href="https://www.instagram.com/lidameln/?hl=uk" target="blank"><img src="img/instagram.png"></a>
+		<a href="https://twitter.com/Lida29804443" target="blank"><img src="img/twitter.png"></a>
+	</div>
+</div>
+
+
+<script>
+
+	/*Фильтр по картинкам*/
+	let filterBox = document.querySelectorAll('.box');
+
+	let categories = document.querySelector('.categories');
+
+	categories.addEventListener('click', func);
+
+	function func(event){
+		if(event.target.tagName !=='LI') return false;
+
+    let filterClass = event.target.dataset['f'];
+
+  for(let elem of categories.children) {
+    	elem.classList.remove('cover');}
+    	event.target.classList.add('cover');
+     
+     filterBox.forEach(elem=>{
+     	elem.classList.remove('hide');
+
+     if(!elem.classList.contains(filterClass) && filterClass !=='all'){
+     	elem.classList.add('hide'); }
+    });
+	};
+
+/*Предсказание*/
+let button = document.getElementById('button');
+button.addEventListener('click', func2);
+
+let prediction = document.querySelector('.prediction');
+
+function func2() {
+	let randomNumber = Math.floor(Math.random()*(predictions.length));
+prediction.innerHTML = predictions[randomNumber];
+}
+
+/*Смена фона*/
+let select = document.getElementById('select');
+select.addEventListener('change',func3);
+
+function func3(){
+document.body.style.backgroundColor = this.value; }
+
+/*Музыка*/
+let audio = document.getElementById('audio');
+let songButton = document.getElementById('songButton');
+songButton.onclick = function(){
+	if (audio.paused) {
+	audio.play();
+    songButton.src = 'img/pause.png';}
+
+    else {audio.pause();
+    	songButton.src = 'img/play.png';}
+};
+</script>
+</body>
+</html>
